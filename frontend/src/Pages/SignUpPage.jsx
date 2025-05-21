@@ -11,7 +11,7 @@ const SignUpPage = () => {
     email: "",
     password: "",
   });
-  const [rememberMe, setRememberMe] = useState(false); // Remember Me state
+  const [rememberMe, setRememberMe] = useState(false);
   const { signup, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
@@ -41,7 +41,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl overflow-hidden">
       <div className="bg-gray-900 lg:w-80 lg:h-[500px] sm:w-48 sm:h-52 md:h-[500px] md:w-96 rounded-lg border border-white p-6">
         <h2 className="text-center myfont text-white text-2xl mb-4">
           Register

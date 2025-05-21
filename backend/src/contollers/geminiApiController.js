@@ -76,7 +76,8 @@ export const gemini = async (req, res) => {
             total: {
               type: Type.NUMBER,
               nullable: false,
-              description: "Total possible score for the rubric",
+              description:
+                "Total possible score for the rubric calculated based on the highest score scale multiply to total length of  criteriaArray",
             },
           },
           required: ["title", "scoringScale", "criteriaArray", "total"],

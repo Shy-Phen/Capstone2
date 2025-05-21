@@ -92,7 +92,7 @@ const ViewPage = () => {
                     {currentEval?.members?.map((mem, index) => (
                       <tr key={index}>
                         <td>{mem.name}</td>
-                        <td>{mem.score === 0 ? " " : mem.score}</td>
+                        <td>{mem.score === 0 ? "N/A" : mem.score}</td>
                       </tr>
                     ))}
                   </tbody>

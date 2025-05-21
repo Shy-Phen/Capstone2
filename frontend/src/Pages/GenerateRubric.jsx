@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { assessmentFrameworkStore } from "../store/assessmentFrameworkStore";
 import { axiosInstance } from "../axios/axios";
 import TableSkeleton from "../utils/tableSkeleton";
+import { promptSample } from "../utils/SamplePrompt";
 
 const GenerateRubric = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const GenerateRubric = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { isSubmitting, error: useFormError },
   } = useForm({
     resolver: zodResolver(promptValidator),
@@ -64,6 +66,10 @@ const GenerateRubric = () => {
     navigate("/assessment-framework");
   };
 
+  const handleSamplePrompt = (p) => {
+    setValue("userPrompt", p, { shouldValidate: true });
+  };
+
   return (
     <div className="ml-10 lg:ml-64 h-screen overflow-auto mt-0">
       <div className="mt-20 flex flex-col items-center ">
@@ -101,21 +107,26 @@ const GenerateRubric = () => {
             </form>
             <div className="mt-8 flex justify-center items-center">
               {!error ? (
-                <h2 className="text-sm text-center">
-                  <span className="bebas-neue-regular">Example prompt:</span>
-                  <span className="font-thin">
-                    <ul>
-                      <li>
-                        -Write a 4-level rubric for an elementary school art
-                        assignment on color theory.
-                      </li>
-                      <li>
-                        -Generate a 5-point rubric for grading college-level
-                        research papers in psychology.
-                      </li>
-                    </ul>
-                  </span>
-                </h2>
+                <div className="flex flex-col justify-center items-center mx-8">
+                  <h2 className="text-sm text-center">
+                    <span className="bebas-neue-regular">Example prompt:</span>
+                  </h2>
+                  <div className="grid grid-cols-1 gap-2 mt-2">
+                    {promptSample.map((p, i) => (
+                      <div
+                        className="rounded-lg border drop-shadow-md shadow-red-400 mx-2 text-center px-1 hover:bg-blue-500"
+                        key={i}
+                      >
+                        <button
+                          className="w-full py-2"
+                          onClick={() => handleSamplePrompt(p)}
+                        >
+                          <p className="text-xs text-center">{p}</p>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ) : (
                 <div className="flex flex-row  justify-center items-center  gap-4 bg-red-50 border-l-4 border-red-500 p-2 mb-6 rounded-md">
                   <h3 className="text-lg font-medium text-red-700">Error:</h3>
