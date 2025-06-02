@@ -62,7 +62,7 @@ export const downloadReport = async (req, res) => {
     const availableWidth = doc.page.width - 60; // Account for margins
     const scoreColWidth =
       scoringScaleLength > 0
-        ? (availableWidth - criteriaColWidth) / scoringScaleLength
+        ? (availableWidth - criteriaColWidth * 2) / scoringScaleLength // Account for both Criteria and Score columns
         : 100;
 
     // Helper function to draw a table cell with compact styling
@@ -105,7 +105,7 @@ export const downloadReport = async (req, res) => {
       if (scoringScaleLength > 0) {
         rubric.scoringScale.forEach((scale, index) => {
           const x = tableLeft + criteriaColWidth + index * scoreColWidth;
-          const headerText = `Score: ${scale.score}\n${scale.description}`;
+          const headerText = `${scale.score}\n${scale.description}`;
           drawTableCell(headerText, x, currentY, scoreColWidth, headerHeight, {
             bold: true,
             align: "center",
@@ -114,6 +114,18 @@ export const downloadReport = async (req, res) => {
           });
         });
       }
+
+      // Draw the Score header at the correct position (after all scoring scale columns)
+      const scoreHeaderX =
+        tableLeft + criteriaColWidth + scoringScaleLength * scoreColWidth;
+      drawTableCell(
+        "Score",
+        scoreHeaderX,
+        currentY,
+        criteriaColWidth, // Same width as criteria column
+        headerHeight,
+        { bold: true, align: "center", isHeader: true, fontSize: 9 }
+      );
 
       return currentY + headerHeight;
     }
@@ -159,7 +171,6 @@ export const downloadReport = async (req, res) => {
         );
 
         // Draw descriptor cells for each scoring scale level
-
         cri.descriptor.forEach((desc, descIndex) => {
           // Only draw if we have a corresponding scoring scale
           if (descIndex < scoringScaleLength) {
@@ -169,6 +180,18 @@ export const downloadReport = async (req, res) => {
             });
           }
         });
+
+        // Draw the empty Score column at the end
+        const scoreColumnX =
+          tableLeft + criteriaColWidth + scoringScaleLength * scoreColWidth;
+        drawTableCell(
+          "", // Empty cell for manual scoring
+          scoreColumnX,
+          currentY,
+          criteriaColWidth, // Same width as criteria column
+          rowHeight,
+          { fontSize: 8 }
+        );
 
         currentY += rowHeight;
       });
@@ -184,8 +207,8 @@ export const downloadReport = async (req, res) => {
       );
       currentY += 30;
     }
-    console.log("Oh shi im getting hit");
 
+    console.log("Oh shi im getting hit");
     console.log(rubric.title);
 
     // Finalize the PDF

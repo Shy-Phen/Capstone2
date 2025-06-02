@@ -109,8 +109,8 @@ const SignUpPage = () => {
             )}
           </button>
         </form>
-        <p className="text-center">
-          Already have an account?{" "}
+        <p className="text-center text-white">
+          Already have an account?
           <Link to="/login" className="link link-primary">
             Log in
           </Link>

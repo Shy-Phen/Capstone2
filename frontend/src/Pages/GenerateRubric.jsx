@@ -1,4 +1,4 @@
-import { SendHorizonalIcon } from "lucide-react";
+import { Send } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -86,25 +86,31 @@ const GenerateRubric = () => {
                 go.
               </p>
             </div>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-row gap-2 w-full items-center justify-center"
-            >
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered input-primary w-full max-w-xs"
-                {...register("userPrompt")}
-              />
-              {useFormError}
-              <button
-                disabled={isSubmitting}
-                type="submit"
-                className="btn btn-outline btn-primary"
-              >
-                {isSubmitting ? "..." : <SendHorizonalIcon />}
-              </button>
-            </form>
+            <div className="w-full md:px-48 h-28 m-2">
+              <div className="flex justify-center border rounded-2xl size-full">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col w-full"
+                >
+                  <textarea
+                    placeholder="Type here..."
+                    className="w-full scrollbar-hide bg-transparent placeholder-gray-400 resize-none focus:outline-none textarea-md px-4 leading-relaxed "
+                    {...register("userPrompt")}
+                  />
+
+                  {useFormError}
+                  <div className="flex items-end justify-end w-full mt-1 py-1 pr-3 border-t">
+                    <button
+                      disabled={isSubmitting}
+                      type="submit"
+                      className="btn btn-outline btn-primary btn-sm"
+                    >
+                      <Send className="size-5" />
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
             <div className="mt-8 flex justify-center items-center">
               {!error ? (
                 <div className="flex flex-col justify-center items-center mx-8">
@@ -154,6 +160,7 @@ const GenerateRubric = () => {
                         {scale.description} ({scale.score})
                       </th>
                     ))}
+                    <th className="border-l border-gray-400">Score</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -163,6 +170,7 @@ const GenerateRubric = () => {
                       {rubric.scoringScale.map((_, i) => (
                         <td key={i}>{criterion.descriptor[i]}</td>
                       ))}
+                      <td className="border-l border-gray-400"></td>
                     </tr>
                   ))}
                 </tbody>

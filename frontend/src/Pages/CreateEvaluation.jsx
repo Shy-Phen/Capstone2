@@ -268,6 +268,8 @@ const CreateEvaluation = () => {
                                 render={({ field }) => (
                                   <input
                                     type="radio"
+                                    name={`criteria-${index}-score`}
+                                    value={scale.score}
                                     className="radio radio-info"
                                     checked={field.value === scale.score}
                                     onChange={() => field.onChange(scale.score)}
