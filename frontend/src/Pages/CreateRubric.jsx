@@ -14,7 +14,6 @@ const CreateRub = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("1");
   const [selectedCriterion, setSelectedCriterion] = useState(0);
-
   const { createAssessment } = assessmentFrameworkStore();
 
   const {

@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "axios": "^1.7.9",
+    "cappppsss": "file:..",
     "daisyui": "^4.12.23",
     "dom-to-image": "^2.6.0",
     "lucide-react": "^0.471.1",
