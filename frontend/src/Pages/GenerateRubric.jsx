@@ -6,7 +6,7 @@ import { promptValidator } from "../Validations/GenerateValidation";
 import { useNavigate } from "react-router-dom";
 import { assessmentFrameworkStore } from "../store/assessmentFrameworkStore";
 import { axiosInstance } from "../axios/axios";
-import TableSkeleton from "../utils/tableSkeleton";
+import TableSkeleton from "../utils/TableSkeleton";
 import { promptSample } from "../utils/SamplePrompt";
 
 const GenerateRubric = () => {
