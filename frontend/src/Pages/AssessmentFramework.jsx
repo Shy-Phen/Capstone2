@@ -2,7 +2,7 @@ import { PencilIcon, WandSparklesIcon } from "lucide-react";
 import { assessmentFrameworkStore } from "../store/assessmentFrameworkStore";
 import { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
-import AssessmentCard from "../Components/assessmentCard";
+import AssessmentCard from "../Components/AssessmentCard.jsx";
 
 import ViewRubric from "../Components/ViewRubric";
 import { useNavigate } from "react-router-dom";
